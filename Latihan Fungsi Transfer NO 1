@@ -1,0 +1,101 @@
+>> % Contoh soal 3.1
+>> num = [1 1];
+>> den = [1 3 1];
+>> sys = tf(num,den) % Membuat fungsi transfer
+
+sys =
+ 
+      s + 1
+  -------------
+  s^2 + 3 s + 1
+ 
+Continuous-time transfer function.
+Model Properties
+>> sys_zpk = zpk(sys) % Membuat ke model zpk
+
+sys_zpk =
+ 
+         (s+1)
+  -------------------
+  (s+2.618) (s+0.382)
+ 
+Continuous-time zero/pole/gain model.
+Model Properties
+
+>> % Contoh soal 3.2
+>> z = -2;
+>> p = [-1 -1 -3];
+>> k = 1;
+>> sys = zpk(z,p,k) % Membuat model zpk
+
+sys =
+ 
+      (s+2)
+  -------------
+  (s+1)^2 (s+3)
+ 
+Continuous-time zero/pole/gain model.
+Model Properties
+>> sys_tf = tf(sys) % mengubah ke model fungsi transfer 
+
+sys_tf =
+ 
+          s + 2
+  ---------------------
+  s^3 + 5 s^2 + 7 s + 3
+ 
+Continuous-time transfer function.
+Model Properties
+
+>> % Contoh soal 3.3
+>> % Menetapkan variabel s, sebagai variabel dari fungsi transfer
+>> s = tf('s');
+>> sys = (s+1)/(s^2+2*s+1)
+
+sys =
+ 
+      s + 1
+  -------------
+  s^2 + 2 s + 1
+ 
+Continuous-time transfer function.
+Model Properties
+>> % Mengembalikan fungsi transfer dalam bentuk terfaktor
+>> s = zpk('s');
+>> sys = (s+1)/(s^2+2*s+1)
+
+sys =
+ 
+   (s+1)
+  -------
+  (s+1)^2
+ 
+Continuous-time zero/pole/gain model.
+Model Properties
+
+>> % Contoh soal 3.4
+>> % Menetapkan variabel s, sebagai variabel dari fungsi transfer
+>> s = zpk('s');
+>> sys = ((s+2)*(s-1))/(((s+3)^2)*(s-5))
+
+sys =
+ 
+   (s+2) (s-1)
+  -------------
+  (s+3)^2 (s-5)
+ 
+Continuous-time zero/pole/gain model.
+Model Properties
+>> % Mengembalikan fungsi transfer dalam bentuk polinominal
+>> s = tf('s');
+>> sys = ((s+2)*(s-1))/(((s+3)^2)*(s-5))
+
+sys =
+ 
+       s^2 + s - 2
+  ---------------------
+  s^3 + s^2 - 21 s - 45
+ 
+Continuous-time transfer function.
+Model Properties
+>> 
