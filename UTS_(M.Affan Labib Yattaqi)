@@ -1,0 +1,91 @@
+>> % 1. Input Matriks A, B, dan C
+A = [0 1; -2 -3];
+B = [1 0; 3 -2];
+C = [1 -1; -2 2];
+
+% 2. Operasi Matriks
+A_plus_B  = A + B;          % Penjumlahan
+A_minus_B = A - B;          % Pengurangan
+A_trans   = A';             % Transpose
+A_inv     = inv(A);         % Inverse
+
+diag_A    = diag(A);        % Elemen diagonal A
+diag_B    = diag(B);        % Elemen diagonal B
+
+det_A     = det(A);         % Determinan A
+det_B     = det(B);         % Determinan B
+det_AB    = det(A * B);     % Determinan hasil perkalian A dan B
+
+eigen_A   = eig(A);         % Eigenvalues dari A
+
+% Menampilkan hasil (opsional, biar rapi di command window)
+disp('Hasil A + B:'), disp(A_plus_B)
+disp('Hasil det(AB):'), disp(det_AB)
+disp('Eigenvalues A:'), disp(eigen_A)
+Hasil A + B:
+     1     1
+     1    -5
+
+Hasil det(AB):
+   -4.0000
+
+Eigenvalues A:
+    -1
+    -2
+
+
+>> % 1. Definisikan Matriks A dan b
+A = [1 2; 3 4];
+b = [5; 6];
+
+% 2. Cara 1: Menggunakan Invers (Sesuai petunjuk soal x = A^-1 * b)
+x_inv = inv(A) * b;
+
+% 3. Cara 2: Menggunakan Backslash Operator (Cara paling direkomendasikan di MATLAB)
+x_slash = A \ b;
+
+% Menampilkan hasil
+fprintf('Solusi x1 = %.2f\n', x_slash(1));
+fprintf('Solusi x2 = %.2f\n', x_slash(2));
+Solusi x1 = -4.00
+Solusi x2 = 4.50
+
+
+
+
+
+
+>> % 1. Definisikan subsistem G1 dan G2
+num1 = [1 1];       % s + 1
+den1 = [1 3];       % s + 3
+G1 = tf(num1, den1);
+
+num2 = [1 0];       % s
+den2 = [1 2 5];     % s^2 + 2s + 5
+G2 = tf(num2, den2);
+
+% 2. Hubungkan secara paralel
+G_total = G1 + G2; % Bisa juga pakai: G_total = parallel(G1, G2);
+
+% 3. Tampilkan fungsi transfer total di Command Window
+disp('Fungsi Transfer Total (Paralel):');
+G_total
+
+% 4. Tampilkan grafik Bode dan Impulse
+figure;
+subplot(2,1,1);
+bode(G_total);      % Menampilkan respon frekuensi
+grid on;
+title('Bode Plot - Sistem Paralel');
+
+subplot(2,1,2);
+impulse(G_total);   % Menampilkan respon terhadap sinyal impuls
+grid on;
+title('Impulse Response - Sistem Paralel');
+Fungsi Transfer Total (Paralel):
+
+G_total =
+ 
+  s^3 + 4 s^2 + 10 s + 5
+  -----------------------
+  s^3 + 5 s^2 + 11 s + 15
