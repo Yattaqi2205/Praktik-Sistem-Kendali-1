@@ -1,0 +1,194 @@
+>> disp('=== SOAL 1.a ===');
+% y = x^3 + 2x^2 - x + 3
+% Representasi polinomial
+p1 = [1 2 -1 3];
+
+% Turunan polinomial
+dp1 = polyder(p1);
+
+disp('Polinomial y = x^3 + 2x^2 - x + 3');
+disp('Hasil turunan dy/dx = ');
+disp(dp1);
+
+% -----------------------------------------
+
+disp(' ');
+disp('=== SOAL 1.b ===');
+% (3x^2 + 6x + 9)(x^2 + 2x)
+
+a = [3 6 9];     % 3x^2 + 6x + 9
+b = [1 2 0];     % x^2 + 2x
+
+% Cara 1: polyder langsung
+[dp_ab, p_ab] = polyder(a,b);
+
+disp('Cara 1: polyder(a,b)');
+disp('Hasil turunan = ');
+disp(dp_ab);
+
+% -----------------------------------------
+
+% Cara 2: conv lalu polyder
+p_conv = conv(a,b);
+dp_conv = polyder(p_conv);
+
+disp(' ');
+disp('Cara 2: conv(a,b) lalu polyder');
+disp('Polinomial hasil perkalian = ');
+disp(p_conv);
+
+disp('Hasil turunan = ');
+disp(dp_conv);
+
+disp(' ');
+disp('=== SELESAI ===');
+=== SOAL 1.a ===
+Polinomial y = x^3 + 2x^2 - x + 3
+Hasil turunan dy/dx = 
+     3     4    -1
+
+ 
+=== SOAL 1.b ===
+Cara 1: polyder(a,b)
+Hasil turunan = 
+   -18   -18
+
+ 
+Cara 2: conv(a,b) lalu polyder
+Polinomial hasil perkalian = 
+     3    12    21    18     0
+
+Hasil turunan = 
+    12    36    42    18
+
+
+
+
+>> disp(' ');
+disp('=== SOAL 2: INTEGRATION OF POLYNOMIAL ===');
+
+% y = x^3 + 2x^2 - x + 3
+p2 = [1 2 -1 3];
+
+% Integral polinomial
+ip2 = polyint(p2);
+
+disp('Polinomial y = x^3 + 2x^2 - x + 3');
+disp('Hasil integral ∫y dx = ');
+disp(ip2);
+ 
+=== SOAL 2: INTEGRATION OF POLYNOMIAL ===
+Polinomial y = x^3 + 2x^2 - x + 3
+Hasil integral ∫y dx = 
+    0.2500    0.6667   -0.5000    3.0000         0
+
+
+
+
+> disp(' ');
+disp('=== SOAL 3: TRANSFER FUNCTION ===');
+
+K = 2;
+T = 3;
+
+% Transfer function H(s) = K / (T*s + 1)
+num = [K];
+den = [T 1];
+
+H = tf(num, den);
+
+disp('Transfer Function H(s) = ');
+H
+ 
+=== SOAL 3: TRANSFER FUNCTION ===
+Transfer Function H(s) = 
+
+H =
+ 
+     2
+  -------
+  3 s + 1
+
+
+
+>> disp(' ');
+disp('=== SOAL 4: TIME RESPONSE (STEP RESPONSE) ===');
+
+% Transfer function H(s) = (s + 1) / (s^2 - s + 3)
+num4 = [1 1];
+den4 = [1 -1 3];
+
+H4 = tf(num4, den4);
+
+% Time vector dari 0 sampai 10 detik
+t = 0:0.01:10;
+
+% Plot step response
+figure;
+step(H4, t);
+grid on;
+title('Step Response of H(s) = (s + 1) / (s^2 - s + 3)');
+xlabel('Time (seconds)');
+ylabel('Amplitude');
+ 
+=== SOAL 4: TIME RESPONSE (STEP RESPONSE) ===
+
+
+
+
+grid on;
+title('Step Response of an Integrator (H(s) = K/s)');
+legend('K = 0.2', 'K = 1', 'K = 5');
+ylabel('Amplitude');
+xlabel('Time (seconds)');
+hold off;
+
+
+
+
+
+
+>> % 1. Set nilai sembarang untuk k, c, dan m (Sesuai instruksi soal)
+k = 10; 
+c = 2;
+m = 1;
+
+% 2. Definisikan matriks sistem kontinu (A, B, C, D)
+A = [0 1; -k/m -c/m];
+B = [0; 1/m];
+C = [1 0];
+D = 0;
+
+% 3. Buat model state-space kontinu
+sys_cont = ss(A, B, C, D);
+
+% 4. Tentukan Sample Time (misal 0.1 detik)
+Ts = 0.1;
+
+% 5. Diskritisasi menggunakan metode Zero-Order Hold (ZOH)
+sys_disc = c2d(sys_cont, Ts, 'zoh');
+
+% Menampilkan hasil matriks diskrit (Ad, Bd, Cd, Dd)
+disp('Matriks Sistem Diskrit:');
+sys_disc
+Matriks Sistem Diskrit:
+
+sys_disc =
+ 
+  A = 
+            x1       x2
+   x1   0.9536  0.08913
+   x2  -0.8913   0.7753
+ 
+  B = 
+             u1
+   x1  0.004644
+   x2   0.08913
+ 
+  C = 
+       x1  x2
+   y1   1   0
+ 
+  D = 
+       u1
+   y1   0
